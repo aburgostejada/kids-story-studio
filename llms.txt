@@ -1,0 +1,15 @@
+# Kids Story Studio
+
+> "Pip and the Missing Glow", a 135-second paper-cut animated short for children drawn entirely by Canvas 2D code
+> (no images, no 3D engine, no AI-generated pixels), with guides to the renderer, the sound and the method: building a
+> film by directing AI coding agents. MIT licensed.
+
+- [Start here](README.md): the film, quick start, how it works.
+- [Module contract and staging bible](film/CONTRACT.md): units, geography, shared state, module APIs, story, shot table.
+- [Building a film with AI coding agents](guides/building-with-agents.md): contract first, one agent per module with a lab, critique from rendered stills, acts, continuity.
+- [A paper-cut renderer in Canvas](guides/paper-cut-renderer.md): cards at depth, pinhole camera, lighting, depth of field, grade.
+- [Sound](guides/sound.md): the mixer, procedural foley and captions, with notes on directing local narration and ACE-Step score cues.
+- [Prompts](prompts/): the builder, director, critique, notes-judge and continuity prompts.
+- [Agent workflow](SKILL.md) and [agent rules](AGENTS.md).
+- [Optional affiliated suggestions](guides/related-tools.md): ProcVideos, Attain OS, AttainSoft.
+- [License](LICENSE): MIT.
