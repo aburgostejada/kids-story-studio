@@ -43,28 +43,28 @@ function ksmall(c, s, x, y, size, col, o = {}) { T(c, s, x, y, { size, weight: o
 
 // ---- the words ---------------------------------------------------------------------------------
 const KW = ES ? {
-  hook: 'IMÁGENES', uses: 'este corto usa', none: 'CERO.', every: 'cada píxel es', code: 'CÓDIGO.',
-  open: ['Abre', 'la página.'], then: 'y entonces', glows: 'BRILLA.',
-  no3d: 'SIN 3D.', noai: 'SIN IMÁGENES IA.', canvas: 'un canvas 2D y JavaScript', pure: ['sin azar, sin reloj,', 'sin memoria del fotograma anterior'],
-  night: 'Una noche…', dark: ['SE APAGÓ', 'LA LUZ.'], together: 'JUNTOS.', friends: 'Pip, Bram y Luma la traen de vuelta',
-  shots: '21 PLANOS.', frames: ['135 segundos · 4.050 fotogramas', 'cada uno de 1920 × 1080'],
-  made: 'hecho dirigiendo', agents: 'AGENTES IA', studio: ['como un estudio', 'dirige sus departamentos'], checked: 'COMPROBADO.', checks: ['el dibujo no usa azar ni reloj,', 'y la tabla de planos cuadra'],
-  title: 'Pip and the Missing Glow', tag: 'Un corto animado, dibujado solo con código.', cta: 'Consíguelo en GitHub',
-  lic: 'Licencia MIT · Node.js 20+', note: 'Fotogramas del corto, dibujados por su propio código. El texto se añadió para este tráiler.',
+  hook: 'IMÁGENES', uses: 'archivos de imagen:', none: 'CERO.', every: 'cada píxel es', code: 'CÓDIGO.',
+  open: ['Ejecútalo', 'en local.'], then: 'y entonces', glows: 'BRILLA.',
+  no3d: 'SIN 3D.', noai: 'SIN IMÁGENES DE IA.', canvas: 'un canvas 2D y JavaScript', pure: ['sin azar, sin reloj,', 'sin memoria previa'],
+  night: 'Una noche…', dark: ['SE APAGÓ', 'LA LUZ.'], together: 'JUNTOS.', friends: 'Pip, Bram y Luma la recuperan',
+  shots: '21 PLANOS.', frames: ['135 segundos', '4.050 fotogramas'],
+  made: 'hecho dirigiendo', agents: 'AGENTES DE IA', studio: ['de programación,', 'como un estudio'], checked: 'COMPROBADO.', checks: ['el dibujo no usa azar ni reloj,', 'y la tabla de planos cuadra'],
+  title: 'Pip and the Missing Glow', tag: 'Un corto dibujado solo con código.', cta: 'Consíguelo en GitHub',
+  lic: 'Licencia MIT · fotogramas reales del corto',
   illu: 'Ilustración · fotogramas reales del corto',
 } : {
-  hook: 'IMAGES', uses: 'this film uses', none: 'ZERO.', every: 'every pixel is', code: 'CODE.',
-  open: ['Open', 'the page.'], then: 'and then', glows: 'IT GLOWS.',
-  no3d: 'NO 3D.', noai: 'NO AI IMAGES.', canvas: 'a 2D canvas and plain JavaScript', pure: ['no randomness, no clock,', 'no memory of the last frame'],
+  hook: 'IMAGES', uses: 'image files in this film:', none: 'ZERO.', every: 'every pixel is', code: 'CODE.',
+  open: ['Run it', 'locally.'], then: 'and then', glows: 'IT GLOWS.',
+  no3d: 'NO 3D.', noai: 'NO AI IMAGES.', canvas: 'a 2D canvas and plain JavaScript', pure: ['no randomness, no clock,', 'no memory of the last one'],
   night: 'One night…', dark: ['THE GLOW', 'WENT OUT.'], together: 'TOGETHER.', friends: 'Pip, Bram and Luma bring it back',
-  shots: '21 SHOTS.', frames: ['135 seconds · 4,050 frames', 'each one 1920 × 1080'],
-  made: 'made by directing', agents: 'AI AGENTS', studio: ['the way a studio', 'directs its departments'], checked: 'CHECKED.', checks: ['no randomness or clock in the drawing,', 'and the shot table still adds up'],
-  title: 'Pip and the Missing Glow', tag: 'An animated short, drawn entirely by code.', cta: 'Get it on GitHub',
-  lic: 'MIT license · Node.js 20+', note: 'Frames from the film, drawn by its own code. The words were added for this trailer.',
+  shots: '21 SHOTS.', frames: ['135 seconds', '4,050 frames'],
+  made: 'made by directing', agents: 'AI AGENTS', studio: ['for coding,', 'like a studio'], checked: 'CHECKED.', checks: ['no randomness or clock in the drawing,', 'and the shot table still adds up'],
+  title: 'Pip and the Missing Glow', tag: 'A short drawn entirely by code.', cta: 'Get it on GitHub',
+  lic: 'MIT license · real frames from the film',
   illu: 'Illustration · real frames from the film',
 };
 const URL_LINE = 'localhost:8000/comp.html?play';
-const OWNER = 'github.com/aburgostejada/', NAME = 'kids-story-studio';
+const NAME = 'kids-story-studio';
 // npm test, as it prints today (tests/trailer.test.mjs checks these numbers against the test files)
 const NPM_TEST = { tests: 10, pass: 8, skipped: 2 };
 const KTERM = [
@@ -173,7 +173,7 @@ const KSHOT = {
   none(c, lt) {
     fill(c, KH);
     const k = outExpo(clamp(lt / 0.22));
-    ksmall(c, KW.uses, W * 0.08, H * 0.33, 60, KI, { align: 'left' });
+    ksmall(c, KW.uses, W * 0.08, H * 0.33, 62, KI, { align: 'left' });
     kword(c, KW.none, W / 2, H * 0.53, W * 0.84, { col: KI, s: lerp(1.7, 1, k), rot: lerp(-0.14, -0.04, k), echo: 3, ey: 26 });
   },
   code(c, lt) {
@@ -250,7 +250,7 @@ const KSHOT = {
     ksmall(c, 'renderAt(t)', W / 2, H * 0.18, 56, KH, { mono: true, weight: 600 });
     const k = outExpo(clamp(lt / 0.2));
     kword(c, 'f(t)', W / 2, H * 0.46, W * 0.6, { col: KC, s: lerp(1.5, 1, k), echo: 2, ex: 0, ey: 30, echoCol: KH });
-    fade(c, clamp((lt - 0.12) / 0.15), () => KW.pure.forEach((l, i) => ksmall(c, l, W / 2, H * 0.74 + i * 66, 50, KC, { weight: 700 })));
+    fade(c, clamp((lt - 0.12) / 0.15), () => KW.pure.forEach((l, i) => ksmall(c, l, W / 2, H * 0.75 + i * 76, 60, KC, { weight: 700 })));
   },
   dark(c, lt) {
     // a still beat: the film's dark garden, no motion and no music
@@ -259,8 +259,8 @@ const KSHOT = {
     const v = c.createLinearGradient(0, 0, 0, H * 0.45); v.addColorStop(0, 'rgba(8,10,30,0.8)'); v.addColorStop(0.75, 'rgba(8,10,30,0.45)'); v.addColorStop(1, 'rgba(8,10,30,0)');
     c.fillStyle = v; c.fillRect(0, 0, W, H * 0.45);
     ksmall(c, KW.night, W / 2, H * 0.1, 54, KH);
-    kword(c, KW.dark[0], W / 2, H * 0.2, W * 0.66, { col: KC, max: 124 });
-    kword(c, KW.dark[1], W / 2, H * 0.325, W * 0.66, { col: KC, max: 124 });
+    kword(c, KW.dark[0], W / 2, H * 0.19, W * 0.58, { col: KC, max: 104 });
+    kword(c, KW.dark[1], W / 2, H * 0.29, W * 0.58, { col: KC, max: 104 });
   },
   together(c, lt, t) {
     fill(c, KH);
@@ -271,19 +271,28 @@ const KSHOT = {
     c.restore();
     const k2 = outExpo(clamp((lt - 0.12) / 0.22));
     if (lt > 0.12) kword(c, KW.together, W / 2, H * 0.8, W * 0.86, { col: KI, s: lerp(1.6, 1, k2), rot: lerp(-0.12, -0.02, k2) });
-    fade(c, clamp((lt - 0.3) / 0.15), () => ksmall(c, KW.friends, W / 2, H * 0.94, 44, KI));
+    fade(c, clamp((lt - 0.3) / 0.15), () => ksmall(c, KW.friends, W / 2, H * 0.945, 54, KI));
   },
-  shots(c, lt) {
+  shots(c, lt, t, d) {
     fill(c, KC);
-    kdrop(c, KW.shots, W / 2, H * 0.36, W * 0.84, lt, { col: KI, colLast: KA, step: 0.035 });
-    fade(c, clamp((lt - 0.2) / 0.15), () => KW.frames.forEach((l, i) => ksmall(c, l, W / 2, H * 0.62 + i * 70, 50, KI, { weight: 700 })));
+    // the camera flies through the stem of the "1" in 21, and the frame fills with ink for the next card
+    const fly = inExpo(clamp((lt - (d - 0.36)) / 0.36)), FS = 1 + 60 * fly;
+    setFont(c, 900, 100); c.letterSpacing = KTR * 100 + 'px';
+    const size = (100 * W * 0.84) / c.measureText(KW.shots).width; setFont(c, 900, size); c.letterSpacing = KTR * size + 'px';
+    const fw = c.measureText(KW.shots).width, ix = W / 2 - fw / 2 + c.measureText('2').width + c.measureText('1').width * 0.45; c.letterSpacing = '0px';
+    const iy = H * 0.36;
+    c.save(); c.translate(ix, iy); c.scale(FS, FS); c.translate(-ix, -iy);
+    kdrop(c, KW.shots, W / 2, iy, W * 0.84, lt, { col: KI, colLast: KA, step: 0.035 });
+    fade(c, (1 - clamp(fly * 4)) * clamp((lt - 0.2) / 0.15), () => KW.frames.forEach((l, i) => ksmall(c, l, W / 2, H * 0.62 + i * 86, 72, KI, { weight: 800 })));
+    c.restore();
+    fade(c, smooth(clamp((fly - 0.7) / 0.3)), () => fill(c, KI));
   },
   agents(c, lt) {
     fill(c, KI);
     ksmall(c, KW.made, W / 2, H * 0.27, 56, KH);
     const k = outExpo(clamp(lt / 0.22));
     kword(c, KW.agents, W / 2, H * 0.48, W * 0.86, { col: KC, s: lerp(1.6, 1, k), rot: lerp(-0.1, -0.02, k), echo: 3, ey: 26, echoCol: KH });
-    fade(c, clamp((lt - 0.2) / 0.15), () => KW.studio.forEach((l, i) => ksmall(c, l, W / 2, H * 0.72 + i * 66, 50, KC)));
+    fade(c, clamp((lt - 0.2) / 0.15), () => KW.studio.forEach((l, i) => ksmall(c, l, W / 2, H * 0.72 + i * 76, 60, KC)));
   },
   test(c, lt) {
     fill(c, KC);
@@ -300,7 +309,7 @@ const KSHOT = {
       y += fs * 1.55;
     });
     // what the tests check, in words
-    fade(c, clamp((lt - 0.6) / 0.15), () => KW.checks.forEach((l, i) => ksmall(c, l, W / 2, by + bh - 110 + i * 56, 42, KH, { weight: 600 })));
+    fade(c, clamp((lt - 0.6) / 0.15), () => KW.checks.forEach((l, i) => ksmall(c, l, W / 2, by + bh - 116 + i * 58, 44, KH, { weight: 600 })));
   },
   end(c, lt, t) {
     // the payoff: the three friends under the relit flower rush in, then the name, the promise and where to get it
@@ -320,15 +329,11 @@ const KSHOT = {
       ls.forEach((l, i) => ksmall(c, l, W / 2, H * 0.34 + i * 66, 54, KH, { weight: 800 }));
     });
     fade(c, a3, () => {
-      ksmall(c, KW.cta, W / 2, H * 0.55, 44, KC + 'dd', { weight: 600 });
-      ksmall(c, OWNER, W / 2, H * 0.63, 50, KC, { weight: 600 });
-      kword(c, NAME, W / 2, H * 0.71, W * 0.76, { col: KC, weight: 900, max: 96 });
+      ksmall(c, KW.cta, W / 2, H * 0.56, 48, KC, { weight: 700 });
+      ksmall(c, 'aburgostejada/', W / 2, H * 0.645, 56, KC + 'dd', { weight: 600 });
+      kword(c, NAME, W / 2, H * 0.74, W * 0.84, { col: KH, weight: 900, max: 120 });
     });
-    fade(c, smooth(clamp((lt - 1.4) / 0.3)), () => {
-      const nl = lines(c, KW.note, 26, 400, W - 160);
-      ksmall(c, KW.lic, W / 2, H - 70 - nl.length * 36 - 10, 26, KC + 'aa', { weight: 400 });
-      nl.forEach((l, i) => ksmall(c, l, W / 2, H - 70 - (nl.length - 1 - i) * 36, 26, KC + 'aa', { weight: 400 }));
-    });
+    fade(c, smooth(clamp((lt - 1.4) / 0.3)), () => ksmall(c, KW.lic, W / 2, H - 64, 30, KC + 'bb', { weight: 500 }));
   },
 };
 function kinetic(c, t) {
@@ -355,6 +360,7 @@ const KCUES = (() => {
   out.push({ t: at('glows') + 0.85, k: 'whoosh', until: at('no3d'), gain: 0.7 });
   out.push({ t: at('dark'), k: 'mute', until: at('together') });
   out.push({ t: at('together') + 0.12, k: 'hit' });
+  out.push({ t: at('agents') - 0.36, k: 'whoosh', until: at('agents'), gain: 0.6 });
   KTERM.forEach(([p], i) => out.push({ t: at('test') + 0.12 + i * 0.1, k: 'tick', freq: p ? 1500 : 1100, gain: 0.14 }));
   out.push({ t: at('end') - 0.45, k: 'whoosh', until: at('end'), gain: 0.8 }, { t: at('end'), k: 'end' });
   return out.sort((a, b) => a.t - b.t);
