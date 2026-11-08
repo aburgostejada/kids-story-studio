@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Pip and the Missing Glow: 15-second trailer</title>
+<!--
+  A 15-second square trailer for the film, drawn with code like the film itself. The film's own modules draw every
+  frame of Pip's garden you see here; trailer.js adds the words, the cuts and the timing.
+    trailer.html?t=3.5      one frame          trailer.html?play   plays in real time
+    &lang=es                the Spanish cut
+  Render it with:  node film/render.mjs --page trailer.html --out out/trailer-picture.mp4 --cues out/trailer-cues.json
+-->
+<style>html,body{margin:0;background:#000}canvas{display:block;width:min(100vw,100vh);height:auto;margin:auto}</style>
+<canvas id="c" width="1080" height="1080"></canvas>
+<script src="core.js"></script>
+<script src="world.js"></script>
+<script src="cast.js"></script>
+<script src="fx.js"></script>
+<script src="shots.js"></script>
+<script src="act1.js"></script>
+<script src="act2.js"></script>
+<script src="act3.js"></script>
+<script src="trailer.js"></script>

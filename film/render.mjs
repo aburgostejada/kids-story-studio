@@ -3,6 +3,8 @@
 // usage: node film/render.mjs --out out/picture.mp4 [--from S] [--to S] [--fps 30]
 //        node film/render.mjs --stills 1,9.5,20 --still-dir DIR [--page lab.html --lab NAME]
 //        node film/render.mjs --stills 0:135:0.5 --still-dir DIR --sheet 6x5      (every 0.5 s, plus contact sheets)
+//        node film/render.mjs --page trailer.html --out out/trailer-picture.mp4 --cues out/trailer-cues.json   (the trailer;
+//        add ?lang=es to the page for the Spanish cut; --cues writes the trailer's sound cues for film/sound/trailer.py)
 // --stills takes times in seconds, comma-separated, or FROM:TO:STEP (TO excluded). --sheet COLSxROWS also tiles the
 // stills, labelled with their times, into DIR/sheet-01.png, sheet-02.png... (--sheet-width W sets one tile, default 320).
 // Needs Node 20+ and the `playwright` package; the video also needs FFmpeg with libx264 on PATH. CHROME_PATH optionally
@@ -41,6 +43,11 @@ try {
   await page.goto(`${origin}/${args.page || 'comp.html'}`, { waitUntil: 'load' });
   const info = await page.evaluate(n => window.boot(n), args.lab || null);
   if (errors.length) throw new Error(errors.join('\n'));
+  if (typeof args.cues === 'string') {
+    if (!info.cues) throw new Error('--cues: this page has no sound cues');
+    fs.mkdirSync(path.dirname(path.resolve(args.cues)), { recursive: true });
+    fs.writeFileSync(args.cues, JSON.stringify({ duration: info.duration, cues: info.cues }, null, 1));
+  }
   const grab = t => page.evaluate(t => { window.renderAt(t); return document.getElementById('c').toDataURL('image/png').split(',')[1]; }, t);
 
   if (args.stills) {
@@ -55,7 +62,7 @@ try {
       fs.writeFileSync(path.join(dir, `still-${s.toFixed(2)}.png`), Buffer.from(await grab(s), 'base64'));
       if (!per) continue;
       await page.evaluate(([k, s, cols, rows, w]) => {   // paste the frame just drawn into the contact sheet
-        const h = Math.round(w * 9 / 16);
+        const cv = document.getElementById('c'), h = Math.round(w * cv.height / cv.width);
         if (k === 0) { window.sheet = Object.assign(document.createElement('canvas'), { width: cols * w, height: rows * h }); const g = window.sheet.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, cols * w, rows * h); }
         const g = window.sheet.getContext('2d'), x = (k % cols) * w, y = Math.floor(k / cols) * h;
         g.drawImage(document.getElementById('c'), x, y, w, h);

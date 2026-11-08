@@ -9,10 +9,14 @@
     "test": "node --test tests/",
     "stills": "node film/render.mjs --stills 4,8,15,23,52,68,92,101,113,121,131 --still-dir out/stills",
     "sheet": "node film/render.mjs --stills 0:135:1 --still-dir out/sheet --sheet 6x5",
-    "render": "node film/render.mjs --out out/picture.mp4"
+    "render": "node film/render.mjs --out out/picture.mp4",
+    "trailer": "node film/render.mjs --page trailer.html --out out/trailer-picture.mp4 --cues out/trailer-cues.json && python3 film/sound/trailer.py out/trailer-cues.json out/trailer-score.wav --picture out/trailer-picture.mp4 --out out/trailer.mp4",
+    "trailer:es": "node film/render.mjs --page 'trailer.html?lang=es' --out out/trailer-picture-es.mp4 --cues out/trailer-cues-es.json && python3 film/sound/trailer.py out/trailer-cues-es.json out/trailer-score-es.wav --picture out/trailer-picture-es.mp4 --out out/trailer-es.mp4"
   },
   "devDependencies": {
     "playwright": "^1.48.0"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
