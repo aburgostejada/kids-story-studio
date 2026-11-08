@@ -43,14 +43,13 @@ function ksmall(c, s, x, y, size, col, o = {}) { T(c, s, x, y, { size, weight: o
 
 // ---- the words ---------------------------------------------------------------------------------
 const KW = ES ? {
-  hook: 'IMÁGENES', uses: 'archivos de imagen:', none: 'CERO.', every: 'cada píxel es', code: 'CÓDIGO.',
+  hook: 'IMÁGENES', uses: 'archivos de imagen en este corto:', none: 'CERO.', every: 'cada píxel es', code: 'CÓDIGO.',
   open: ['Ejecútalo', 'en local.'], then: 'y entonces', glows: 'BRILLA.',
-  no3d: 'SIN 3D.', noai: 'SIN IMÁGENES DE IA.', canvas: 'un canvas 2D y JavaScript', pure: ['sin azar, sin reloj,', 'sin memoria previa'],
+  no3d: 'SIN 3D.', noai: 'SIN IMÁGENES DE IA.', canvas: 'un canvas 2D y JavaScript', pure: ['sin azar, sin reloj, sin', 'depender del anterior'],
   night: 'Una noche…', dark: ['SE APAGÓ', 'LA LUZ.'], together: 'JUNTOS.', friends: 'Pip, Bram y Luma la recuperan',
   shots: '21 PLANOS.', frames: ['135 segundos', '4.050 fotogramas'],
   made: 'hecho dirigiendo', agents: 'AGENTES DE IA', studio: ['de programación,', 'como un estudio'], checked: 'COMPROBADO.', checks: ['el dibujo no usa azar ni reloj,', 'y la tabla de planos cuadra'],
   title: 'Pip and the Missing Glow', tag: 'Un corto dibujado solo con código.', cta: 'Consíguelo en GitHub',
-  lic: 'Licencia MIT · fotogramas reales del corto',
   illu: 'Ilustración · fotogramas reales del corto',
 } : {
   hook: 'IMAGES', uses: 'image files in this film:', none: 'ZERO.', every: 'every pixel is', code: 'CODE.',
@@ -60,7 +59,6 @@ const KW = ES ? {
   shots: '21 SHOTS.', frames: ['135 seconds', '4,050 frames'],
   made: 'made by directing', agents: 'AI AGENTS', studio: ['for coding,', 'like a studio'], checked: 'CHECKED.', checks: ['no randomness or clock in the drawing,', 'and the shot table still adds up'],
   title: 'Pip and the Missing Glow', tag: 'A short drawn entirely by code.', cta: 'Get it on GitHub',
-  lic: 'MIT license · real frames from the film',
   illu: 'Illustration · real frames from the film',
 };
 const URL_LINE = 'localhost:8000/comp.html?play';
@@ -148,9 +146,9 @@ function kdrop(c, s, cx, cy, wT, lt, o = {}) {
 }
 // a readable pill: what the demo is (a drawing of the page around real frames, not a recording of a screen)
 function ktag(c, s, cx, cy) {
-  setFont(c, 700, 40); const w = c.measureText(s).width + 56;
-  rrect(c, cx - w / 2, cy - 34, w, 68, 34); c.fillStyle = KC; c.fill();
-  T(c, s, cx, cy + 14, { size: 40, weight: 700, col: KI, align: 'center' });
+  setFont(c, 700, 44); const w = c.measureText(s).width + 60;
+  rrect(c, cx - w / 2, cy - 37, w, 74, 37); c.fillStyle = KC; c.fill();
+  T(c, s, cx, cy + 15, { size: 44, weight: 700, col: KI, align: 'center' });
 }
 function cursor(c, x, y, press, a) {
   if (a <= 0.001) return;
@@ -258,9 +256,9 @@ const KSHOT = {
     // the words sit in the night sky, clear of Pip's face
     const v = c.createLinearGradient(0, 0, 0, H * 0.45); v.addColorStop(0, 'rgba(8,10,30,0.8)'); v.addColorStop(0.75, 'rgba(8,10,30,0.45)'); v.addColorStop(1, 'rgba(8,10,30,0)');
     c.fillStyle = v; c.fillRect(0, 0, W, H * 0.45);
-    ksmall(c, KW.night, W / 2, H * 0.1, 54, KH);
-    kword(c, KW.dark[0], W / 2, H * 0.19, W * 0.58, { col: KC, max: 104 });
-    kword(c, KW.dark[1], W / 2, H * 0.29, W * 0.58, { col: KC, max: 104 });
+    ksmall(c, KW.night, W / 2, H * 0.075, 54, KH);
+    kword(c, KW.dark[0], W / 2, H * 0.155, W * 0.58, { col: KC, max: 104 });
+    kword(c, KW.dark[1], W / 2, H * 0.245, W * 0.58, { col: KC, max: 104 });
   },
   together(c, lt, t) {
     fill(c, KH);
@@ -317,12 +315,12 @@ const KSHOT = {
     c.save(); c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2);
     film(c, F_TRIO + lt, 0, 0, W, H, TRIO[0], TRIO[1]); c.restore();
     kflash(c, t, at('end'), 0.14);
-    fade(c, smooth(clamp((lt - 0.35) / 0.4)), () => {
+    fade(c, smooth(clamp((lt - 0.25) / 0.35)), () => {
       const v = c.createLinearGradient(0, 0, 0, H); v.addColorStop(0, 'rgba(8,10,30,0.6)'); v.addColorStop(0.5, 'rgba(8,10,30,0.74)'); v.addColorStop(1, 'rgba(8,10,30,0.88)');
       c.fillStyle = v; c.fillRect(0, 0, W, H);
     });
-    if (lt > 0.45) kdrop(c, KW.title, W / 2, H * 0.22, W * 0.86, lt - 0.45, { col: KC, step: 0.025, from: 0.6 });
-    const a2 = smooth(clamp((lt - 0.9) / 0.3)), a3 = smooth(clamp((lt - 1.15) / 0.3));
+    if (lt > 0.3) kdrop(c, KW.title, W / 2, H * 0.22, W * 0.86, lt - 0.3, { col: KC, step: 0.025, from: 0.6 });
+    const a2 = smooth(clamp((lt - 0.65) / 0.3)), a3 = smooth(clamp((lt - 0.85) / 0.3));
     fade(c, a2, () => {
       // a tagline too long for one line breaks after its comma
       const one = lines(c, KW.tag, 54, 800, W * 0.86), ls = one.length > 1 && KW.tag.includes(', ') ? KW.tag.replace(', ', ',\n').split('\n') : one;
@@ -333,7 +331,6 @@ const KSHOT = {
       ksmall(c, 'aburgostejada/', W / 2, H * 0.645, 56, KC + 'dd', { weight: 600 });
       kword(c, NAME, W / 2, H * 0.74, W * 0.84, { col: KH, weight: 900, max: 120 });
     });
-    fade(c, smooth(clamp((lt - 1.4) / 0.3)), () => ksmall(c, KW.lic, W / 2, H - 64, 30, KC + 'bb', { weight: 500 }));
   },
 };
 function kinetic(c, t) {
