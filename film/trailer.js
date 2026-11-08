@@ -48,7 +48,7 @@ const KW = ES ? {
   no3d: 'SIN 3D.', noai: 'SIN IMÁGENES DE IA.', canvas: 'un canvas 2D y JavaScript', pure: ['sin azar, sin reloj, sin', 'depender del anterior'],
   night: 'Una noche…', dark: ['SE APAGÓ', 'LA LUZ.'], together: 'JUNTOS.', friends: 'Pip, Bram y Luma la recuperan',
   shots: '21 PLANOS.', frames: ['135 segundos', '4.050 fotogramas'],
-  made: 'hecho dirigiendo', agents: 'AGENTES DE IA', studio: ['de programación,', 'como un estudio'], checked: 'COMPROBADO.', checks: ['el dibujo no usa azar ni reloj,', 'y la tabla de planos cuadra'],
+  made: 'hecho dirigiendo', agents: 'AGENTES DE IA', studio: ['de programación,', 'como un estudio'], checked: 'COMPROBADO.', checks: ['sin azar ni reloj al dibujar,', 'y la tabla de planos cuadra'],
   title: 'Pip and the Missing Glow', tag: 'Un corto dibujado solo con código.', cta: 'Consíguelo en GitHub',
   illu: 'Ilustración · fotogramas reales del corto',
 } : {
@@ -57,7 +57,7 @@ const KW = ES ? {
   no3d: 'NO 3D.', noai: 'NO AI IMAGES.', canvas: 'a 2D canvas and plain JavaScript', pure: ['no randomness, no clock,', 'no memory of the last one'],
   night: 'One night…', dark: ['THE GLOW', 'WENT OUT.'], together: 'TOGETHER.', friends: 'Pip, Bram and Luma bring it back',
   shots: '21 SHOTS.', frames: ['135 seconds', '4,050 frames'],
-  made: 'made by directing', agents: 'AI AGENTS', studio: ['for coding,', 'like a studio'], checked: 'CHECKED.', checks: ['no randomness or clock in the drawing,', 'and the shot table still adds up'],
+  made: 'made by directing', agents: 'AI AGENTS', studio: ['for coding,', 'like a studio'], checked: 'CHECKED.', checks: ['no randomness, no clock,', 'and the shot table adds up'],
   title: 'Pip and the Missing Glow', tag: 'A short drawn entirely by code.', cta: 'Get it on GitHub',
   illu: 'Illustration · real frames from the film',
 };
@@ -307,7 +307,7 @@ const KSHOT = {
       y += fs * 1.55;
     });
     // what the tests check, in words
-    fade(c, clamp((lt - 0.6) / 0.15), () => KW.checks.forEach((l, i) => ksmall(c, l, W / 2, by + bh - 116 + i * 58, 44, KH, { weight: 600 })));
+    fade(c, clamp((lt - 0.6) / 0.15), () => KW.checks.forEach((l, i) => ksmall(c, l, W / 2, by + bh - 124 + i * 64, 50, KH, { weight: 700 })));
   },
   end(c, lt, t) {
     // the payoff: the three friends under the relit flower rush in, then the name, the promise and where to get it
@@ -315,12 +315,12 @@ const KSHOT = {
     c.save(); c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2);
     film(c, F_TRIO + lt, 0, 0, W, H, TRIO[0], TRIO[1]); c.restore();
     kflash(c, t, at('end'), 0.14);
-    fade(c, smooth(clamp((lt - 0.25) / 0.35)), () => {
-      const v = c.createLinearGradient(0, 0, 0, H); v.addColorStop(0, 'rgba(8,10,30,0.6)'); v.addColorStop(0.5, 'rgba(8,10,30,0.74)'); v.addColorStop(1, 'rgba(8,10,30,0.88)');
+    fade(c, smooth(clamp((lt - 0.1) / 0.3)), () => {
+      const v = c.createLinearGradient(0, 0, 0, H); v.addColorStop(0, 'rgba(8,10,30,0.66)'); v.addColorStop(0.42, 'rgba(8,10,30,0.5)'); v.addColorStop(0.62, 'rgba(8,10,30,0.66)'); v.addColorStop(1, 'rgba(8,10,30,0.86)');
       c.fillStyle = v; c.fillRect(0, 0, W, H);
     });
-    if (lt > 0.3) kdrop(c, KW.title, W / 2, H * 0.22, W * 0.86, lt - 0.3, { col: KC, step: 0.025, from: 0.6 });
-    const a2 = smooth(clamp((lt - 0.65) / 0.3)), a3 = smooth(clamp((lt - 0.85) / 0.3));
+    if (lt > 0.12) kdrop(c, KW.title, W / 2, H * 0.22, W * 0.86, lt - 0.12, { col: KC, step: 0.025, from: 0.6 });
+    const a2 = smooth(clamp((lt - 0.4) / 0.25)), a3 = smooth(clamp((lt - 0.55) / 0.25));
     fade(c, a2, () => {
       // a tagline too long for one line breaks after its comma
       const one = lines(c, KW.tag, 54, 800, W * 0.86), ls = one.length > 1 && KW.tag.includes(', ') ? KW.tag.replace(', ', ',\n').split('\n') : one;
