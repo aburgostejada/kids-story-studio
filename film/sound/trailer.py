@@ -151,7 +151,7 @@ def measure(path, extra=()):
     """FFmpeg's loudnorm analysis of a file (integrated LUFS, true peak, ...), as a dict."""
     r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(path), *extra, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json",
                         "-f", "null", "-"], capture_output=True, text=True, check=True)
-    return json.loads(re.search(r"\{[^{}]*\}\s*$", r.stderr).group(0))
+    return json.loads(re.findall(r"\{[^{}]*\}", r.stderr)[-1])
 
 
 def master(wav, picture, out, lufs=-14.0, tp=-1.5):
