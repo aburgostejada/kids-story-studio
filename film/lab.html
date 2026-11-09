@@ -1,0 +1,25 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Pip lab</title>
+<style>html,body{margin:0;background:#000}canvas{display:block;width:100vw;height:auto}</style>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script src="core.js"></script>
+<script>window.PIP.LABS = {};</script>
+<script src="world.js"></script>
+<script src="cast.js"></script>
+<script src="fx.js"></script>
+<script src="lab-world.js"></script>
+<script src="lab-cast.js"></script>
+<script src="lab-fx.js"></script>
+<script>
+// Lab host: renders one module test scene PIP.LABS[name](t) -> scene. ?lab=name&t=s for the browser.
+const cv = document.getElementById('c'), ctx = cv.getContext('2d'), q = new URLSearchParams(location.search);
+let LAB = q.get('lab');
+window.boot = async (name) => { if (name) LAB = name; if (!PIP.LABS[LAB]) throw new Error('no lab ' + LAB + '; have ' + Object.keys(PIP.LABS)); return { duration: 10, shots: 1 }; };
+window.renderAt = (t) => {
+  const scene = PIP.LABS[LAB](t);
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.filter = 'none'; ctx.fillStyle = '#000'; ctx.fillRect(0, 0, PIP.W, PIP.H);
+  PIP.renderScene(ctx, scene, t); PIP.grade(ctx, cv, t, scene.grade || {});
+};
+if (LAB) window.addEventListener('load', async () => { await window.boot(); window.renderAt(Number(q.get('t') || 0)); });
+</script>
