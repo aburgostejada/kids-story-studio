@@ -328,7 +328,7 @@ const KSHOT = {
     });
     fade(c, a3, () => {
       ksmall(c, KW.cta, W / 2, H * 0.56, 48, KC, { weight: 700 });
-      ksmall(c, 'aburgostejada/', W / 2, H * 0.645, 56, KC + 'dd', { weight: 600 });
+      ksmall(c, 'augustobuilds/', W / 2, H * 0.645, 56, KC + 'dd', { weight: 600 });
       kword(c, NAME, W / 2, H * 0.74, W * 0.84, { col: KH, weight: 900, max: 120 });
     });
   },
