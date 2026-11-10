@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+renders/
+output/
+*.blend
+*.blend1
+*.mp4
+*.mov
+*.wav
+.env
+.env.*
+.look-target.png
+node_modules/
+out/
